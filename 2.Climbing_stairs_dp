@@ -1,0 +1,85 @@
+1.Using Recursion
+
+#include<bits/stdc++.h>
+using namespace std;
+int fun(int ind){
+    if(ind==0 || ind==1){
+        return 1;
+    }
+    int left=fun(ind-1);
+    int right=fun(ind-2);
+    return left+right;
+}
+int main(){
+    int n;
+    cin>>n;
+    cout<<fun(n);
+}
+
+2.Using Memoization
+#include<bits/stdc++.h>
+using namespace std;
+
+int fun(int ind, vector<int>& dp){
+    if(ind == 0 || ind == 1) return 1;
+    if(dp[ind] != -1) return dp[ind];
+
+    int left = fun(ind - 1, dp);
+    int right = fun(ind - 2, dp);
+
+    return dp[ind] = left + right;
+}
+
+int main(){
+    int n;
+    cin >> n;
+    vector<int> dp(n + 1, -1);
+    cout << fun(n, dp);
+}
+
+
+3.Using Tabulation
+
+#include<bits/stdc++.h>
+using namespace std;
+int fun(int ind,vector<int>& dp){
+    if(ind==0 || ind==1){
+        return 1;
+    }
+    dp[0]=1;
+    dp[1]=1;
+    for(int i=2;i<=ind;i++){
+        dp[i]=dp[i-2]+dp[i-1];
+    }
+    return dp[ind];
+}
+int main(){
+    int n;
+    cin>>n;
+    vector<int> dp(n+1);
+    cout<<fun(n,dp);
+}
+
+4.Space optimization
+
+#include<bits/stdc++.h>
+using namespace std;
+int fun(int ind){
+    if(ind==0 || ind==1){
+        return 1;
+    }
+   int prev=1;
+   int prev1=1;
+   int curr;
+    for(int i=2;i<=ind;i++){
+        curr=prev+prev1;
+        prev=prev1;
+        prev1=curr;
+    }
+    return prev1;
+}
+int main(){
+    int n;
+    cin>>n;
+    cout<<fun(n);
+}
