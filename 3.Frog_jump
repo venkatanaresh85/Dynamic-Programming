@@ -1,0 +1,21 @@
+1.Using memoization
+
+#include<bits/stdc++.h>
+using namespace std;
+int solve(int n,vector<int> &dp,int arr[]){
+    if(n==0) return 0;
+    if(dp[n]!=-1) return dp[n];
+    int left=solve(n-1,dp,arr)+abs(arr[n]-arr[n-1]);
+    int right = INT_MAX;
+    if(n>1)
+   right=solve(n-2,dp,arr)+abs(arr[n]-arr[n-2]);
+    return dp[n]=min(left,right);
+}
+
+int main(){
+    int n;
+    cin>>n;
+    vector<int> dp(n,-1);
+    int arr[]={10,20,30,10};
+    cout<<solve(n-1,dp,arr);
+}
