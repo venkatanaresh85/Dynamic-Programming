@@ -19,3 +19,25 @@ int main(){
     int arr[]={10,20,30,10};
     cout<<solve(n-1,dp,arr);
 }
+
+#Using Tabbulation
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int n;
+    cin>>n;
+    vector<int> dp(n+1,-1);
+    int arr[]={10,20,30,10};
+    dp[0]=0;
+    for(int i=1;i<n;i++){
+        int fs=dp[i-1]+abs(arr[i]-arr[i-1]);
+        int sc=INT_MAX;
+        if(i>1){
+            sc=dp[i-2]+abs(arr[i]-arr[i-2]);
+        }
+        dp[i]=min(fs,sc);
+    }
+    cout<<dp[n-1];
+}
