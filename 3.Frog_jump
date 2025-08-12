@@ -41,3 +41,27 @@ int main(){
     }
     cout<<dp[n-1];
 }
+
+#Using space optimization
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int n;
+    cin>>n;
+    int arr[]={10,20,30,10};
+    int prev=0;
+    int prev1=0;
+    for(int i=1;i<n;i++){
+        int fs=prev+abs(arr[i]-arr[i-1]);
+        int sc=INT_MAX;
+        if(i>1){
+            sc=prev1+abs(arr[i]-arr[i-2]);
+        }
+        int curr=min(fs,sc);
+        prev1=prev;
+        prev=curr;
+    }
+    cout<<prev;
+}
